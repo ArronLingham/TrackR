@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrackR Dashboard</title>
+  <link rel="stylesheet" href="/styles/dashboard.css?v=<%= assetVersion %>">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <h1>TrackR Dashboard</h1>
+    <div class="header-controls">
+      <button class="btn btn-primary" id="btn-config-sequence">Configure Sequence</button>
+      <button class="btn" id="btn-change-major">Change Major / Transcript</button>
+      <button class="btn btn-primary" id="btn-add-term">Add Future Term</button>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <!-- Left Pane: Requirements Checklist -->
+    <aside class="requirements-panel" id="req-panel">
+      <h2>Progress Overview</h2>
+      <div class="overview-cards">
+        <div class="metric-card">
+          <div class="label">Total Credits</div>
+          <div class="value" id="metric-credits">0.0</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Math Credits</div>
+          <div class="value" id="metric-math-credits">0.0</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Cumulative Avg</div>
+          <div class="value" id="metric-cum-avg">--</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Major Avg</div>
+          <div class="value" id="metric-major-avg">--</div>
+        </div>
+      </div>
+      
+      <h2>Degree & Major Requirements</h2>
+      <div id="requirements-list">
+        <!-- Rendered by JS -->
+      </div>
+    </aside>
+
+    <!-- Right Pane: Term Calendar -->
+    <main class="calendar-panel">
+      <div class="calendar-header">
+        <h2>Term Calendar</h2>
+        <span class="text-muted" style="color: var(--text-muted); font-size: 0.875rem;">Drag courses from requirements into future terms to plan your schedule.</span>
+      </div>
+      
+      <div class="calendar-grid" id="calendar-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="modal-settings">
+    <div class="modal-content">
+      <h2 style="margin-top:0">Change Major or Transcript</h2>
+      <form id="settings-form" method="POST" action="/dashboard">
+        <div class="form-group">
+          <label>Program</label>
+          <select name="major" id="major-select">
+            <% for (const program of programs) { %>
+              <option value="<%= program.id %>" <%= program.id === progress.program ? 'selected' : '' %>><%= program.label %></option>
+            <% } %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Transcript (Paste from Quest)</label>
+          <textarea name="courses" id="transcript-input"><%= userCourses %></textarea>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+          <button type="button" class="btn" id="btn-close-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sequence Config Modal -->
+  <div class="modal-overlay" id="modal-sequence">
+    <div class="modal-content">
+      <h2 style="margin-top:0">Configure Future Sequence</h2>
+      <div class="form-group">
+        <label>Select a Sequence Template (Wipes current plan!)</label>
+        <select id="sequence-select">
+          <option value="none">Custom / Don't generate</option>
+          <option value="seq1">Sequence 1 (Math/CS)</option>
+          <option value="seq2">Sequence 2 (Math/CS)</option>
+          <option value="seq3">Sequence 3 (Math/CS)</option>
+          <option value="seq4">Sequence 4 (Math/CS)</option>
+          <option value="reg">Regular (No Co-op)</option>
+        </select>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-muted)">
+        Note: You can manually change a future term's name or type (Study/Work/Off) by clicking on its header in the calendar later!
+      </p>
+      <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+        <button type="button" class="btn" id="btn-close-sequence">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btn-apply-sequence">Apply Sequence</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Initial State Injection -->
+  <script>
+    window.APP_STATE = {
+      progress: <%- JSON.stringify(progress) %>,
+      summary: <%- JSON.stringify(summary) %>,
+      outstanding: <%- JSON.stringify(outstanding) %>,
+      academics: <%- JSON.stringify(academics) %>,
+      terms: <%- JSON.stringify(transcript.terms) %>,
+      major: <%- JSON.stringify(progress.program) %>,
+      courseTitles: <%- JSON.stringify(courseTitles) %>,
+      coursePrereqs: <%- JSON.stringify(coursePrereqs) %>,
+      // To track which courses we manually planned on the client side
+      plannedCoursesByTerm: {} 
+    };
+  </script>
+  <script src="/scripts/dashboard.js?v=<%= assetVersion %>"></script>
+</body>
+</html>

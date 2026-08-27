@@ -83,7 +83,12 @@ export function summarizeAcademics(transcript) {
       remaining: round2(Math.max(0, rules.minimum_units - unitsEarned)),
       remainingAfterTerm: round2(Math.max(0, rules.minimum_units - unitsEarned - unitsInProgress)),
       percent: Math.min(100, Math.round((unitsEarned / rules.minimum_units) * 100)),
-      math: round2(mathEarned),
+      math: {
+        earned: round2(mathEarned),
+        required: rules.minimum_math_units,
+        remaining: round2(Math.max(0, rules.minimum_math_units - mathEarned)),
+        met: mathEarned >= rules.minimum_math_units,
+      },
       nonMath: {
         earned: round2(nonMathEarned),
         required: rules.minimum_non_math_units,

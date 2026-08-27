@@ -91,12 +91,12 @@ function toCourseSets(input, excluded) {
   const clean = (codes) =>
     new Set((codes ?? []).map(canonical).filter((code) => code && !excluded.has(code)));
 
-  if (Array.isArray(input)) return { completed: clean(input), inProgress: new Set() };
+  if (Array.isArray(input)) return { completed: clean(input), inProgress: new Set(), planned: new Set() };
 
   const completed = clean(input.completed);
-  // A course cannot be both; a completed retake wins over an enrolled section.
   const inProgress = new Set([...clean(input.inProgress)].filter((code) => !completed.has(code)));
-  return { completed, inProgress };
+  const planned = new Set([...clean(input.planned)].filter((code) => !completed.has(code) && !inProgress.has(code)));
+  return { completed, inProgress, planned };
 }
 
 /**
@@ -114,16 +114,19 @@ function toCourseSets(input, excluded) {
 export function checkMajorProgress(programId, courses) {
   const program = loadProgram(programId);
   const excluded = new Set((program.excluded_courses ?? []).map((course) => canonical(course.code)));
-  const { completed, inProgress } = toCourseSets(courses, excluded);
+  const { completed, inProgress, planned } = toCourseSets(courses, excluded);
 
   const settled = evaluateBlocks(program, completed, excluded);
-  // Re-run including enrolled courses to see what this term would finish.
-  // Evaluation is pure and cheap, so running it twice is simpler and safer
-  // than threading a second state through every evaluator.
-  const projectedSet = new Set([...completed, ...inProgress]);
-  const projected = inProgress.size
-    ? evaluateBlocks(program, projectedSet, excluded)
+  
+  const inProgressSet = new Set([...completed, ...inProgress]);
+  const projectedInProgress = inProgress.size
+    ? evaluateBlocks(program, inProgressSet, excluded)
     : settled;
+
+  const plannedSet = new Set([...inProgressSet, ...planned]);
+  const projectedPlanned = planned.size 
+    ? evaluateBlocks(program, plannedSet, excluded)
+    : projectedInProgress;
 
   const progress = { program: programId };
 
@@ -131,38 +134,45 @@ export function checkMajorProgress(programId, courses) {
     if (BLOCK_SECTIONS.includes(key)) {
       progress[key] = value.map((block) => {
         const result = settled.get(block);
-        const ahead = projected.get(block);
+        const ahead = projectedInProgress.get(block);
+        const plannedAhead = projectedPlanned.get(block);
         return {
           ...result,
-          // Courses counted only because they are still in progress.
           in_progress: !result.met && Boolean(ahead?.met),
-          projected_taken: ahead?.courses_taken ?? result.courses_taken,
-          state: result.met ? "met" : ahead?.met ? "in_progress" : "unmet",
+          planned: !result.met && !ahead?.met && Boolean(plannedAhead?.met),
+          projected_taken: plannedAhead?.courses_taken ?? ahead?.courses_taken ?? result.courses_taken,
+          state: result.met ? "met" : ahead?.met ? "in_progress" : plannedAhead?.met ? "planned" : "unmet",
         };
       });
     } else if (key === "communication_requirement") {
       const result = checkCommunication(value, completed);
-      const ahead = inProgress.size ? checkCommunication(value, projectedSet) : result;
+      const ahead = inProgress.size ? checkCommunication(value, inProgressSet) : result;
+      const plannedAhead = planned.size ? checkCommunication(value, plannedSet) : ahead;
       progress[key] = {
         ...result,
         in_progress: !result.met && ahead.met,
-        state: result.met ? "met" : ahead.met ? "in_progress" : "unmet",
+        planned: !result.met && !ahead.met && plannedAhead.met,
+        state: result.met ? "met" : ahead.met ? "in_progress" : plannedAhead.met ? "planned" : "unmet",
       };
     } else if (key === "breadth_requirement") {
       const result = checkBreadth(completed, value);
-      const ahead = inProgress.size ? checkBreadth(projectedSet, value) : result;
+      const ahead = inProgress.size ? checkBreadth(inProgressSet, value) : result;
+      const plannedAhead = planned.size ? checkBreadth(plannedSet, value) : ahead;
       progress[key] = {
         ...result,
         in_progress: !result.satisfied && ahead.satisfied,
-        state: result.satisfied ? "met" : ahead.satisfied ? "in_progress" : "unmet",
+        planned: !result.satisfied && !ahead.satisfied && plannedAhead.satisfied,
+        state: result.satisfied ? "met" : ahead.satisfied ? "in_progress" : plannedAhead.satisfied ? "planned" : "unmet",
       };
     } else if (key === "depth_requirement") {
       const result = checkDepth(completed, value);
-      const ahead = inProgress.size ? checkDepth(projectedSet, value) : result;
+      const ahead = inProgress.size ? checkDepth(inProgressSet, value) : result;
+      const plannedAhead = planned.size ? checkDepth(plannedSet, value) : ahead;
       progress[key] = {
         ...result,
         in_progress: !result.satisfied && ahead.satisfied,
-        state: result.satisfied ? "met" : ahead.satisfied ? "in_progress" : "unmet",
+        planned: !result.satisfied && !ahead.satisfied && plannedAhead.satisfied,
+        state: result.satisfied ? "met" : ahead.satisfied ? "in_progress" : plannedAhead.satisfied ? "planned" : "unmet",
       };
     }
   }
@@ -185,20 +195,24 @@ function* sections(progress) {
 export function summarize(progress) {
   let met = 0;
   let inProgressCount = 0;
+  let plannedCount = 0;
   let total = 0;
 
   for (const { result } of sections(progress)) {
     total += 1;
     if (result.state === "met") met += 1;
     else if (result.state === "in_progress") inProgressCount += 1;
+    else if (result.state === "planned") plannedCount += 1;
   }
 
   return {
     met,
     inProgress: inProgressCount,
+    planned: plannedCount,
     total,
     percent: total === 0 ? 0 : Math.round((met / total) * 100),
     projectedPercent: total === 0 ? 0 : Math.round(((met + inProgressCount) / total) * 100),
+    plannedPercent: total === 0 ? 0 : Math.round(((met + inProgressCount + plannedCount) / total) * 100),
   };
 }
 

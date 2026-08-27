@@ -3,8 +3,41 @@ import { listPrograms, isKnownProgram } from "../data/programs.js";
 import { parseTranscript } from "../domain/transcript.js";
 import { summarizeAcademics } from "../domain/academics.js";
 import { checkMajorProgress, outstanding, summarize } from "../domain/progress.js";
+import { get as getCourse } from "../data/catalog.js";
+import { readJSON } from "../data/json.js";
+import { PATHS } from "../data/paths.js";
 
 const router = express.Router();
+const prereqsData = readJSON(PATHS.prereqs);
+
+function buildCourseTitles(progress, transcript) {
+  const titles = {};
+  const add = (c) => {
+    if (c && !titles[c]) {
+      const r = getCourse(c);
+      if (r) titles[c] = r.title;
+    }
+  };
+  if (transcript && transcript.entries) transcript.entries.forEach(e => add(e.code));
+  outstanding(progress).forEach(o => {
+    (o.remaining || []).forEach(add);
+    (o.rules || []).forEach(r => (r.courses_remaining || []).forEach(add));
+  });
+  return titles;
+}
+
+function buildCoursePrereqs(titlesObj) {
+  const prereqs = {};
+  for (const c of Object.keys(titlesObj)) {
+    if (prereqsData[c]) {
+      prereqs[c] = {
+        text: prereqsData[c].prereq_text,
+        codes: prereqsData[c].prereq_codes || []
+      };
+    }
+  }
+  return prereqs;
+}
 
 /** Largest paste we will read. A full transcript is a few thousand characters. */
 const MAX_INPUT = 200_000;
@@ -80,9 +113,10 @@ router.post("/submit", (req, res) => {
     .map((entry) => entry.code);
 
   const progress = checkMajorProgress(major, { completed, inProgress });
+  const titles = buildCourseTitles(progress, transcript);
 
-  res.render("result", {
-    title: "Results",
+  res.render("dashboard", {
+    title: "TrackR Dashboard",
     activePage: "results",
     programs: listPrograms(),
     progress,
@@ -91,6 +125,8 @@ router.post("/submit", (req, res) => {
     academics: summarizeAcademics(transcript),
     transcript,
     userCourses: rawCourses.trim(),
+    courseTitles: titles,
+    coursePrereqs: buildCoursePrereqs(titles),
   });
 });
 
@@ -123,6 +159,27 @@ router.post("/contact", (req, res) => {
     activePage: "contact",
     values: { name: "", email: "", subject: "", message: "" },
     sent: { email: values.email },
+  });
+});
+
+router.post("/api/progress", (req, res) => {
+  const { major, completed = [], inProgress = [], planned = [] } = req.body;
+
+  if (!isKnownProgram(major)) {
+    return res.status(400).json({ error: "Unknown program" });
+  }
+
+  const progress = checkMajorProgress(major, { completed, inProgress, planned });
+  
+  // Note: academics summary doesn't support "planned" yet, so we just use completed & inProgress
+  // We can just return the progress for now.
+  const titles = buildCourseTitles(progress, null);
+  res.json({
+    progress,
+    summary: summarize(progress),
+    outstanding: outstanding(progress),
+    courseTitles: titles,
+    coursePrereqs: buildCoursePrereqs(titles),
   });
 });
 

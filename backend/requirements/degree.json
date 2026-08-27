@@ -3,6 +3,7 @@
   "label": "Four-Year Honours",
   "minimum_units": 20.0,
   "minimum_non_math_units": 5.0,
+  "minimum_math_units": 10.0,
   "maximum_failed_units": 2.0,
   "minimum_cumulative_average": 60,
   "math_subjects": ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"],

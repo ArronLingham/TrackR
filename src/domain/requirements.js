@@ -44,7 +44,7 @@ export function isExclusive(requirement) {
 }
 
 function cap(list) {
-  return list.slice(0, MAX_REMAINING_SHOWN);
+  return list; // Return the full list so the frontend can implement "show more" dynamically
 }
 
 /**
