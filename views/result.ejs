@@ -1,0 +1,583 @@
+<%- include('partials/head', { title: 'Results', wide: true }) %>
+<%- include('partials/header', { activePage: 'results' }) %>
+
+<%
+  const SECTION_TITLES = {
+    required_courses: "Core Courses",
+    elective_requirement: "Elective Requirements",
+    additional_requirement: "Additional Requirements",
+  };
+  const units = academics.units;
+  const averages = academics.averages;
+  const pct = (value) => (value === null ? "—" : value + "%");
+  let sectionIndex = 0;
+%>
+
+<main class="px-3" id="main">
+  <div class="hero-box-wide">
+    <div class="page-header">
+      <h1>Academic Progress</h1>
+      <p class="program-name"><%= progress.program %></p>
+
+      <div class="overall-progress">
+        <div
+          class="progress-bar-container progress-bar-container--lg"
+          role="progressbar"
+          aria-label="Requirements met"
+          aria-valuenow="<%= summary.met %>"
+          aria-valuemin="0"
+          aria-valuemax="<%= summary.total %>"
+        >
+          <div class="progress-bar-fill" style="width: <%= summary.percent %>%"></div>
+          <div class="progress-bar-fill progress-bar-fill--pending"
+               style="width: <%= summary.projectedPercent - summary.percent %>%"></div>
+        </div>
+        <p class="overall-progress__label">
+          <%= summary.met %> of <%= summary.total %> requirements met (<%= summary.percent %>%)<%
+          if (summary.inProgress) { %> · <%= summary.inProgress %> in progress this term<% } %>
+        </p>
+      </div>
+
+      <button class="btn btn-sm btn-edit" type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+        Edit program or transcript
+      </button>
+    </div>
+
+    <!-- ---------------------------------------------------------------- -->
+    <!-- At-a-glance figures                                              -->
+    <!-- ---------------------------------------------------------------- -->
+    <div class="stat-grid">
+      <% if (academics.hasGrades && averages.cumulative !== null) { %>
+        <div class="stat-card">
+          <span class="stat-label">Cumulative average</span>
+          <span class="stat-value <%= averages.meetsMinimum ? '' : 'stat-value--warn' %>">
+            <%= pct(averages.cumulative) %>
+          </span>
+          <span class="stat-note">≈ <%= averages.cumulativeGpa.toFixed(1) %> GPA · minimum <%= averages.minimum %>%</span>
+        </div>
+        <% if (averages.math !== null) { %>
+          <div class="stat-card">
+            <span class="stat-label">Math course average</span>
+            <span class="stat-value"><%= pct(averages.math) %></span>
+            <span class="stat-note">≈ <%= averages.mathGpa.toFixed(1) %> GPA</span>
+          </div>
+        <% } %>
+      <% } %>
+
+      <div class="stat-card">
+        <span class="stat-label">Units earned</span>
+        <span class="stat-value"><%= units.earned %></span>
+        <span class="stat-note">of <%= units.required %> for <%= units.label %></span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Units remaining</span>
+        <span class="stat-value"><%= units.remaining %></span>
+        <span class="stat-note">
+          <% if (units.inProgress) { %><%= units.remainingAfterTerm %> after this term<% } else { %>
+            about <%= Math.ceil(units.remaining / 0.5) %> more courses<% } %>
+        </span>
+      </div>
+    </div>
+
+    <% if (!academics.hasGrades) { %>
+      <p class="constraint-note">
+        No grades found in what you pasted, so every course is counted as complete and no averages
+        are shown. Paste your full transcript to get averages and an accurate credit count.
+      </p>
+    <% } %>
+    <% if (units.unitsAssumed) { %>
+      <p class="constraint-note">
+        Some courses did not state their unit value, so 0.5 units was assumed. Paste the transcript
+        columns that include units for an exact total.
+      </p>
+    <% } %>
+
+    <!-- ---------------------------------------------------------------- -->
+    <!-- What is still outstanding                                        -->
+    <!-- ---------------------------------------------------------------- -->
+    <% sectionIndex += 1; %>
+    <section class="results-section">
+      <h2 class="section-heading">
+        <button class="section-header" type="button" data-bs-toggle="collapse"
+                data-bs-target="#section-<%= sectionIndex %>" aria-expanded="true"
+                aria-controls="section-<%= sectionIndex %>">
+          <span class="section-title-wrapper">
+            <span>What you still need</span>
+            <span class="section-progress"><%= outstanding.length %> outstanding</span>
+          </span>
+          <span class="collapse-icon" aria-hidden="true">▼</span>
+        </button>
+      </h2>
+      <div class="collapse show" id="section-<%= sectionIndex %>">
+        <% if (outstanding.length === 0) { %>
+          <div class="requirement-item">
+            <p class="rule--met mb-0">
+              Every requirement TrackR tracks is met. Confirm the rest with an academic advisor.
+            </p>
+          </div>
+        <% } else { %>
+          <% outstanding.forEach(function (item) { %>
+            <div class="requirement-item">
+              <div class="requirement-header">
+                <span class="requirement-description">
+                  <span class="outstanding-section"><%= item.section %></span>
+                  <%= item.description %>
+                </span>
+                <%- include('partials/state-badge', { state: item.state }) %>
+              </div>
+              <% if (item.count && item.count.need > 1) { %>
+                <p class="requirement-count mb-0">
+                  <%= item.count.have %> of <%= item.count.need %> courses counted
+                </p>
+              <% } %>
+              <% item.rules.forEach(function (rule) { %>
+                <p class="rule--unmet mb-0">
+                  <%= rule.message %> <span class="rule-count">(<%= rule.have %>/<%= rule.need %>)</span>
+                </p>
+              <% }); %>
+            </div>
+          <% }); %>
+        <% } %>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------- -->
+    <!-- Credits                                                          -->
+    <!-- ---------------------------------------------------------------- -->
+    <% sectionIndex += 1; %>
+    <section class="results-section">
+      <h2 class="section-heading">
+        <button class="section-header collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#section-<%= sectionIndex %>" aria-expanded="false"
+                aria-controls="section-<%= sectionIndex %>">
+          <span class="section-title-wrapper">
+            <span>Credits</span>
+            <span class="section-progress">
+              <span><%= units.earned %>/<%= units.required %></span>
+              <span class="progress-bar-container" role="progressbar" aria-label="Units earned"
+                    aria-valuenow="<%= units.earned %>" aria-valuemin="0" aria-valuemax="<%= units.required %>">
+                <span class="progress-bar-fill" style="width: <%= units.percent %>%"></span>
+              </span>
+            </span>
+          </span>
+          <span class="collapse-icon" aria-hidden="true">▼</span>
+        </button>
+      </h2>
+      <div class="collapse" id="section-<%= sectionIndex %>">
+        <div class="requirement-item">
+          <dl class="fact-list">
+            <div><dt>Units earned</dt><dd><%= units.earned %></dd></div>
+            <div><dt>In progress</dt><dd><%= units.inProgress %></dd></div>
+            <div><dt>Still needed</dt><dd><%= units.remaining %></dd></div>
+            <div><dt>Math units</dt><dd><%= units.math %></dd></div>
+            <div>
+              <dt>Non-math units</dt>
+              <dd class="<%= units.nonMath.met ? 'rule--met' : 'rule--unmet' %>">
+                <%= units.nonMath.earned %> / <%= units.nonMath.required %>
+                <% if (!units.nonMath.met) { %>(<%= units.nonMath.remaining %> more)<% } %>
+              </dd>
+            </div>
+            <div>
+              <dt>Failed units</dt>
+              <dd class="<%= units.overFailedLimit ? 'rule--unmet' : '' %>">
+                <%= units.failed %> / <%= units.failedLimit %> allowed
+              </dd>
+            </div>
+            <div><dt>Courses counted</dt><dd><%= academics.counts.courses %></dd></div>
+          </dl>
+          <% academics.notes.forEach(function (note) { %>
+            <p class="constraint-note"><%= note %></p>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------- -->
+    <!-- What the parser actually read                                    -->
+    <!-- ---------------------------------------------------------------- -->
+    <% sectionIndex += 1; %>
+    <section class="results-section">
+      <h2 class="section-heading">
+        <button class="section-header collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#section-<%= sectionIndex %>" aria-expanded="false"
+                aria-controls="section-<%= sectionIndex %>">
+          <span class="section-title-wrapper">
+            <span>What TrackR read</span>
+            <span class="section-progress">
+              <%= transcript.entries.length %> course<%= transcript.entries.length === 1 ? "" : "s" %><%
+              if (transcript.terms.length) { %> · <%= transcript.terms.length %> term<%= transcript.terms.length === 1 ? "" : "s" %><% } %><%
+              if (transcript.unparsedLines.length) { %> · <span class="pending-count"><%= transcript.unparsedLines.length %> line<%= transcript.unparsedLines.length === 1 ? "" : "s" %> skipped</span><% } %>
+            </span>
+          </span>
+          <span class="collapse-icon" aria-hidden="true">▼</span>
+        </button>
+      </h2>
+      <div class="collapse" id="section-<%= sectionIndex %>">
+        <div class="requirement-item">
+          <p class="constraint-note mt-0">
+            Check this against your transcript. If a course is missing or a grade looks wrong, the
+            paste was in a shape TrackR could not read — the skipped lines below usually say why.
+          </p>
+          <div class="table-scroll">
+            <table class="term-table">
+              <caption class="visually-hidden">Courses read from your transcript</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Course</th><th scope="col">Title</th>
+                  <th scope="col">Units</th><th scope="col">Grade</th>
+                  <th scope="col">Term</th><th scope="col">Counts as</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% transcript.attempts.forEach(function (entry) { %>
+                  <tr>
+                    <th scope="row"><%= entry.raw %></th>
+                    <td class="term-table__title"><%= entry.title %></td>
+                    <td><%= entry.units %><%= entry.unitsAssumed ? "*" : "" %></td>
+                    <td><%= entry.grade.raw || "—" %></td>
+                    <td><%= entry.term || "—" %></td>
+                    <td>
+                      <% if (entry.grade.earnsCredit) { %>
+                        <span class="rule--met">complete</span>
+                      <% } else if (entry.grade.inProgress) { %>
+                        <span class="pending-count">in progress</span>
+                      <% } else if (entry.grade.failed) { %>
+                        <span class="rule--unmet">no credit</span>
+                      <% } else { %>
+                        <span class="muted">no credit</span>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+          <% if (transcript.attempts.some(function (e) { return e.unitsAssumed; })) { %>
+            <p class="constraint-note">* unit value assumed, because the paste did not state one.</p>
+          <% } %>
+
+          <% if (transcript.unparsedLines.length) { %>
+            <h3 class="section-category-title">Lines TrackR skipped</h3>
+            <p class="constraint-note mt-0">
+              These had no course code it recognised. Headers and totals are skipped on purpose; a
+              course row here means the format was not understood.
+            </p>
+            <ul class="skipped-lines">
+              <% transcript.unparsedLines.slice(0, 25).forEach(function (line) { %>
+                <li><code><%= line %></code></li>
+              <% }); %>
+            </ul>
+            <% if (transcript.unparsedLines.length > 25) { %>
+              <p class="constraint-note">+<%= transcript.unparsedLines.length - 25 %> more.</p>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------- -->
+    <!-- Averages                                                         -->
+    <!-- ---------------------------------------------------------------- -->
+    <% if (academics.hasGrades && averages.terms.length) { %>
+      <% sectionIndex += 1; %>
+      <section class="results-section">
+        <h2 class="section-heading">
+          <button class="section-header collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#section-<%= sectionIndex %>" aria-expanded="false"
+                  aria-controls="section-<%= sectionIndex %>">
+            <span class="section-title-wrapper">
+              <span>Averages by term</span>
+              <span class="section-progress"><%= pct(averages.cumulative) %> cumulative</span>
+            </span>
+            <span class="collapse-icon" aria-hidden="true">▼</span>
+          </button>
+        </h2>
+        <div class="collapse" id="section-<%= sectionIndex %>">
+          <div class="requirement-item">
+            <div class="table-scroll">
+              <table class="term-table">
+                <caption class="visually-hidden">Average and units by term</caption>
+                <thead>
+                  <tr><th scope="col">Term</th><th scope="col">Level</th>
+                      <th scope="col">Units</th><th scope="col">Average</th><th scope="col">≈ GPA</th></tr>
+                </thead>
+                <tbody>
+                  <% averages.terms.forEach(function (term) { %>
+                    <tr>
+                      <th scope="row"><%= term.name %></th>
+                      <td><%= term.level || "—" %></td>
+                      <td><%= term.units %></td>
+                      <td><%= pct(term.average) %></td>
+                      <td><%= term.gpa === null ? "—" : term.gpa.toFixed(1) %></td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+            <p class="constraint-note">
+              Averages are unit-weighted, include every attempt, and count any grade below 32% as
+              32% — the same rules Waterloo uses. The GPA column is an unofficial approximation;
+              Waterloo publishes averages only as percentages.
+            </p>
+          </div>
+        </div>
+      </section>
+    <% } %>
+
+    <!-- ---------------------------------------------------------------- -->
+    <!-- Requirement detail                                               -->
+    <!-- ---------------------------------------------------------------- -->
+    <% Object.entries(progress).forEach(function ([section, data]) { %>
+      <% if (Array.isArray(data)) { %>
+        <%
+          sectionIndex += 1;
+          const met = data.filter(function (r) { return r.state === "met"; }).length;
+          const pending = data.filter(function (r) { return r.state === "in_progress"; }).length;
+          const percent = data.length ? Math.round((met / data.length) * 100) : 0;
+        %>
+        <section class="results-section">
+          <h2 class="section-heading">
+            <button class="section-header collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#section-<%= sectionIndex %>" aria-expanded="false"
+                    aria-controls="section-<%= sectionIndex %>">
+              <span class="section-title-wrapper">
+                <span><%= SECTION_TITLES[section] || section.replace(/_/g, " ") %></span>
+                <span class="section-progress">
+                  <span><%= met %>/<%= data.length %><% if (pending) { %> <span class="pending-count">+<%= pending %></span><% } %></span>
+                  <span class="progress-bar-container" role="progressbar"
+                        aria-label="<%= SECTION_TITLES[section] || section %> progress"
+                        aria-valuenow="<%= met %>" aria-valuemin="0" aria-valuemax="<%= data.length %>">
+                    <span class="progress-bar-fill" style="width: <%= percent %>%"></span>
+                  </span>
+                </span>
+              </span>
+              <span class="collapse-icon" aria-hidden="true">▼</span>
+            </button>
+          </h2>
+
+          <div class="collapse" id="section-<%= sectionIndex %>">
+            <% data.forEach(function (req) { %>
+              <div class="requirement-item">
+                <div class="requirement-header">
+                  <span class="requirement-description"><%= req.description %></span>
+                  <%- include('partials/state-badge', { state: req.state }) %>
+                </div>
+
+                <% if (req.progress && req.progress.count.need > 1) { %>
+                  <p class="requirement-count">
+                    <%= req.progress.count.have %> of <%= req.progress.count.need %> courses counted
+                  </p>
+                <% } %>
+
+                <% if (req.progress && req.progress.rules.length) { %>
+                  <ul class="rule-list">
+                    <% req.progress.rules.forEach(function (rule) { %>
+                      <li class="<%= rule.met ? 'rule--met' : 'rule--unmet' %>">
+                        <span aria-hidden="true"><%= rule.met ? "✓" : "•" %></span>
+                        <%= rule.message %>
+                        <span class="rule-count">(<%= rule.have %>/<%= rule.need %>)</span>
+                      </li>
+                    <% }); %>
+                  </ul>
+                <% } %>
+
+                <% if (req.missing_required && req.missing_required.length) { %>
+                  <p class="rule--unmet">Still needs: <%= req.missing_required.join(", ") %></p>
+                <% } %>
+
+                <div class="meta">
+                  <div class="meta-row">
+                    <span class="meta-label">Counted:</span>
+                    <%- include('partials/course-list', { courses: req.courses_taken, more: 0 }) %>
+                  </div>
+                  <% if (req.state === 'in_progress') { %>
+                    <div class="meta-row">
+                      <span class="meta-label">With this term:</span>
+                      <%- include('partials/course-list', { courses: req.projected_taken, more: 0 }) %>
+                    </div>
+                  <% } %>
+                  <% if (req.type !== 'one_required' && req.type !== 'all_required') { %>
+                    <div class="meta-row">
+                      <span class="meta-label">Still available:</span>
+                      <%- include('partials/course-list', {
+                        courses: req.courses_remaining,
+                        more: req.remaining_total - req.courses_remaining.length
+                      }) %>
+                    </div>
+                  <% } else if (req.state !== 'met') { %>
+                    <div class="meta-row">
+                      <span class="meta-label">Missing:</span>
+                      <%- include('partials/course-list', { courses: req.courses_remaining, more: 0 }) %>
+                    </div>
+                  <% } %>
+                </div>
+
+                <% (req.constraints || []).forEach(function (note) { %>
+                  <p class="constraint-note"><%= note %></p>
+                <% }); %>
+              </div>
+            <% }); %>
+          </div>
+        </section>
+
+      <% } else if (section === "communication_requirement") { %>
+        <% sectionIndex += 1; %>
+        <section class="results-section">
+          <h2 class="section-heading">
+            <button class="section-header collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#section-<%= sectionIndex %>" aria-expanded="false"
+                    aria-controls="section-<%= sectionIndex %>">
+              <span class="section-title-wrapper">
+                <span>Communication Requirement</span>
+                <span class="section-progress"><%- include('partials/state-badge', { state: data.state }) %></span>
+              </span>
+              <span class="collapse-icon" aria-hidden="true">▼</span>
+            </button>
+          </h2>
+
+          <div class="collapse" id="section-<%= sectionIndex %>">
+            <div class="requirement-item">
+              <h3 class="section-category-title">Options</h3>
+              <ul class="option-list">
+                <% data.options.forEach(function (option) { %>
+                  <li>
+                    <%- include('partials/state-badge', { state: option.met ? 'met' : 'unmet' }) %>
+                    <%= option.description %>
+                    <span class="rule-count">
+                      (<%= option.requires.map(function (r) {
+                        return r.label + " " + Math.min(r.have, r.need) + "/" + r.need;
+                      }).join(", ") %>)
+                    </span>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
+
+            <% Object.entries(data.lists).forEach(function ([key, list]) { %>
+              <div class="requirement-item">
+                <div class="requirement-header">
+                  <span class="requirement-description"><%= list.description %></span>
+                </div>
+                <div class="meta">
+                  <div class="meta-row">
+                    <span class="meta-label">Taken:</span>
+                    <%- include('partials/course-list', { courses: list.courses_taken, more: 0 }) %>
+                  </div>
+                  <div class="meta-row">
+                    <span class="meta-label">Available:</span>
+                    <%- include('partials/course-list', { courses: list.courses_remaining, more: 0 }) %>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+        </section>
+
+      <% } else if (section === "breadth_requirement") { %>
+        <% sectionIndex += 1; %>
+        <section class="results-section">
+          <h2 class="section-heading">
+            <button class="section-header collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#section-<%= sectionIndex %>" aria-expanded="false"
+                    aria-controls="section-<%= sectionIndex %>">
+              <span class="section-title-wrapper">
+                <span>Breadth Requirement</span>
+                <span class="section-progress"><%- include('partials/state-badge', { state: data.state }) %></span>
+              </span>
+              <span class="collapse-icon" aria-hidden="true">▼</span>
+            </button>
+          </h2>
+
+          <div class="collapse" id="section-<%= sectionIndex %>">
+            <div class="requirement-item">
+              <p class="requirement-description"><%= data.description %></p>
+              <% Object.values(data.categories).forEach(function (category) { %>
+                <div class="meta-row">
+                  <span class="meta-label"><%= category.label %>:</span>
+                  <span class="<%= category.met ? 'rule--met' : 'rule--unmet' %>"><%= category.progress %></span>
+                  <% if (category.taken.length) { %>
+                    <span class="muted"><%= category.taken.join(", ") %></span>
+                  <% } %>
+                </div>
+              <% }); %>
+              <p class="constraint-note"><%= data.note %></p>
+            </div>
+          </div>
+        </section>
+
+      <% } else if (section === "depth_requirement") { %>
+        <% sectionIndex += 1; %>
+        <section class="results-section">
+          <h2 class="section-heading">
+            <button class="section-header collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#section-<%= sectionIndex %>" aria-expanded="false"
+                    aria-controls="section-<%= sectionIndex %>">
+              <span class="section-title-wrapper">
+                <span>Depth Requirement</span>
+                <span class="section-progress"><%- include('partials/state-badge', { state: data.state }) %></span>
+              </span>
+              <span class="collapse-icon" aria-hidden="true">▼</span>
+            </button>
+          </h2>
+
+          <div class="collapse" id="section-<%= sectionIndex %>">
+            <div class="requirement-item">
+              <p class="requirement-description"><%= data.description %></p>
+              <% if (data.satisfied) { %>
+                <div class="meta-row"><span class="meta-label">Subject:</span> <%= data.subject %></div>
+                <div class="meta-row">
+                  <span class="meta-label">Courses:</span>
+                  <%= (data.chain ? data.chain.slice().reverse() : data.courses_used || []).join(" → ") %>
+                </div>
+              <% } else { %>
+                <p class="rule--unmet"><%= data.note %></p>
+              <% } %>
+              <% if (data.examples && data.examples.length) { %>
+                <p class="constraint-note">
+                  Examples: <%= data.examples.map(function (e) { return e.join(", "); }).join("  •  ") %>
+                </p>
+              <% } %>
+            </div>
+          </div>
+        </section>
+      <% } %>
+    <% }); %>
+  </div>
+</main>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <form action="/submit" method="POST">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="editModalLabel">Edit your entry</h2>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-start">
+          <div class="form-group-wrapper">
+            <label for="edit-major" class="form-label">Program</label>
+            <select class="form-select" id="edit-major" name="major" required>
+              <% programs.forEach(function (program) { %>
+                <option value="<%= program.id %>" <%= progress.program === program.id ? 'selected' : '' %>>
+                  <%= program.label %>
+                </option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="form-group-wrapper">
+            <label for="edit-courses" class="form-label">Transcript or course list</label>
+            <textarea class="form-control transcript-input" id="edit-courses" name="courses" rows="12" required><%= userCourses %></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-get-started">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/scripts/uwflow-tooltips.js?v=<%= assetVersion %>" defer></script>
+<%- include('partials/footer') %>

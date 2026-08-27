@@ -1,0 +1,207 @@
+{
+  "program": "BCFM Computing and Financial Management",
+  "required_courses": [
+    {
+      "type": "all_required",
+      "courses": [
+        { "code": "AFM132", "title": "Introduction to Business Stages", "credits": 0.5 },
+        { "code": "AFM191", "title": "Introduction to Financial Reporting and Managerial Decision Making 1", "credits": 0.5 },
+        { "code": "AFM274", "title": "Introduction to Corporate Finance", "credits": 0.5 },
+        { "code": "AFM322", "title": "Derivative Securities", "credits": 0.5 },
+        { "code": "AFM424", "title": "Equity Investments", "credits": 0.5 },
+        { "code": "AFM425", "title": "Fixed Income Securities", "credits": 0.5 },
+        { "code": "CFM101", "title": "Introduction to Financial Markets and Data Analytics", "credits": 0.5 },
+        { "code": "CFM301", "title": "Financial Data Analytics", "credits": 0.5 },
+        { "code": "CS341", "title": "Algorithms", "credits": 0.5 },
+        { "code": "ECON101", "title": "Introduction to Microeconomics", "credits": 0.5 },
+        { "code": "ECON102", "title": "Introduction to Macroeconomics", "credits": 0.5 },
+        { "code": "STAT373", "title": "Regression and Forecasting Methods in Finance", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "n_required",
+      "exclusive": false,
+      "count": 2,
+      "courses": [
+        { "code": "COMMST223", "title": "Public Speaking", "credits": 0.5 },
+        { "code": "EMLS129R", "title": "Written Academic English", "credits": 0.5 },
+        { "code": "ENGL109", "title": "Introduction to Academic Writing", "credits": 0.5 },
+        { "code": "ENGL119", "title": "Communications in Mathematics and Computer Science", "credits": 0.5 },
+        { "code": "ENGL129R", "title": "Written Academic English", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "ACTSC291", "title": "Global Capital Markets and Financial Analytics", "credits": 0.5 },
+        { "code": "AFM272", "title": "Global Capital Markets and Financial Analytics", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS115", "title": "Introduction to Computer Science 1", "credits": 0.5 },
+        { "code": "CS135", "title": "Designing Functional Programs", "credits": 0.5 },
+        { "code": "CS145", "title": "Designing Functional Programs (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_group_required",
+      "groups": [
+        {
+          "type": "all_required",
+          "courses": [
+            { "code": "CS136", "title": "Elementary Algorithm Design and Data Abstraction", "credits": 0.5 },
+            { "code": "CS136L", "title": "Tools and Techniques for Software Development", "credits": 0.25 }
+          ]
+        },
+        {
+          "type": "all_required",
+          "courses": [
+            { "code": "CS146", "title": "Elementary Algorithm Design and Data Abstraction (Advanced Level)", "credits": 0.5 },
+            { "code": "CS136L", "title": "Tools and Techniques for Software Development", "credits": 0.25 }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS240", "title": "Data Structures and Data Management", "credits": 0.5 },
+        { "code": "CS240E", "title": "Data Structures and Data Management (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS241", "title": "Foundations of Sequential Programs", "credits": 0.5 },
+        { "code": "CS241E", "title": "Foundations of Sequential Programs (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS245", "title": "Logic and Computation", "credits": 0.5 },
+        { "code": "CS245E", "title": "Logic and Computation (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS246", "title": "Object-Oriented Software Development", "credits": 0.5 },
+        { "code": "CS246E", "title": "Object-Oriented Software Development (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH127", "title": "Calculus 1 for the Sciences", "credits": 0.5 },
+        { "code": "MATH137", "title": "Calculus 1 for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH147", "title": "Calculus 1 (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH128", "title": "Calculus 2 for the Sciences", "credits": 0.5 },
+        { "code": "MATH138", "title": "Calculus 2 for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH148", "title": "Calculus 2 (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH135", "title": "Algebra for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH145", "title": "Algebra (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH136", "title": "Linear Algebra 1 for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH146", "title": "Linear Algebra 1 (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH239", "title": "Introduction to Combinatorics", "credits": 0.5 },
+        { "code": "MATH249", "title": "Introduction to Combinatorics (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "STAT230", "title": "Probability", "credits": 0.5 },
+        { "code": "STAT240", "title": "Probability (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "STAT231", "title": "Statistics", "credits": 0.5 },
+        { "code": "STAT241", "title": "Statistics (Advanced Level)", "credits": 0.5 }
+      ]
+    }
+  ],
+
+  "elective_requirement": [
+    {
+      "type": "n_required",
+      "count": 2,
+      "description": "Complete 2 from this list or any additional AFM 3xx+ course",
+      "courses": [
+        { "code": "AFM291", "title": "Intermediate Financial Accounting 1", "credits": 0.5 },
+        { "code": "ARBUS202", "title": "Professional and Business Ethics", "credits": 0.5 },
+        { "code": "ARBUS302", "title": "Principles of Marketing", "credits": 0.5 },
+        { "code": "CFM401", "title": "Topics in Financial Technology", "credits": 0.5 },
+        { "code": "ECON201", "title": "Microeconomic Theory for Business and Policy", "credits": 0.5 },
+        { "code": "ECON206", "title": "Money and Banking 1", "credits": 0.5 },
+        { "code": "ECON207", "title": "Economic Growth and Development 1", "credits": 0.5 },
+        { "code": "ECON231", "title": "Introduction to International Economics", "credits": 0.5 },
+        { "code": "ECON332", "title": "International Finance", "credits": 0.5 },
+        { "code": "MGMT244", "title": "Principles of Marketing", "credits": 0.5 },
+        { "code": "PHIL215", "title": "Professional and Business Ethics", "credits": 0.5 }
+      ],
+      "patterns": ["AFM3", "AFM4"]
+    },
+    {
+      "type": "range_required",
+      "count": 2,
+      "description": "Complete 2 additional courses from: CO487, CS251 or CS251E, CS340–CS398, CS440–CS498",
+      "courses": [
+        { "code": "CO487", "title": "Applied Cryptography", "credits": 0.5 },
+        { "code": "CS251", "title": "Computer Organization and Design", "credits": 0.5 },
+        { "code": "CS251E", "title": "Computer Organization and Design (Enriched)", "credits": 0.5 }
+      ],
+      "range": ["CS340-CS398", "CS440-CS498"]
+    },
+    {
+      "type": "range_required",
+      "count": 1,
+      "description": "Complete one additional CS course from CS440–CS498",
+      "range": ["CS440-CS498"]
+    }
+  ],
+
+  "additional_requirement": [
+    {
+      "type": "one_group_required",
+      "exclusive": true,
+      "description": "Complete 1.0 unit of AFM 3xx+ courses (including CFM401 if not taken above) or 1.5 units of AFM 3xx+ courses",
+      "groups": [
+        {
+          "type": "n_required",
+          "count": 2,
+          "patterns": ["AFM3", "AFM4"],
+          "required": ["CFM401"]
+        },
+        {
+          "type": "n_required",
+          "count": 3,
+          "patterns": ["AFM3", "AFM4"]
+        }
+      ]
+    }
+  ]
+}

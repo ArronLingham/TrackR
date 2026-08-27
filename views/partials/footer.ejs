@@ -1,0 +1,40 @@
+      <footer class="mt-auto text-white-50 text-center">
+        <p class="mb-0">
+          &copy; 2025 TrackR. All rights reserved.
+          <br />
+          Made with 💛 by the TrackR team.
+        </p>
+        <p class="footer-note">
+          Requirements are transcribed from the University of Waterloo Undergraduate Studies
+          Calendar. Always confirm with an academic advisor before relying on them.
+        </p>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js"></script>
+    <script>
+      // The animated background is decorative. Skip it when the CDN is blocked
+      // or the viewer has asked for reduced motion, rather than throwing and
+      // taking the rest of the page's scripts down with it.
+      (function () {
+        var reduceMotion =
+          window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || typeof VANTA === "undefined" || !VANTA.TOPOLOGY) return;
+        VANTA.TOPOLOGY({
+          el: "#vanta-bg",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          color: 0xcaba5c,
+          backgroundColor: 0x0,
+        });
+      })();
+    </script>
+  </body>
+</html>

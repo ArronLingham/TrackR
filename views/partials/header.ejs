@@ -1,0 +1,24 @@
+<header class="mb-auto">
+  <div>
+    <a href="/" class="brand-link text-decoration-none">
+      <span class="brand float-md-start mb-0">TrackR</span>
+    </a>
+    <nav class="nav nav-masthead justify-content-center float-md-end" aria-label="Main">
+      <%
+        const pages = [
+          { href: "/", key: "home", label: "Home" },
+          { href: "/features", key: "features", label: "Features" },
+          { href: "/about", key: "about", label: "About" },
+          { href: "/contact", key: "contact", label: "Contact" },
+        ];
+      %>
+      <% pages.forEach(function (page) { %>
+        <a
+          class="nav-link fw-bold py-1 px-2 <%= activePage === page.key ? 'active' : '' %>"
+          href="<%= page.href %>"
+          <%= activePage === page.key ? 'aria-current="page"' : "" %>
+        ><%= page.label %></a>
+      <% }); %>
+    </nav>
+  </div>
+</header>

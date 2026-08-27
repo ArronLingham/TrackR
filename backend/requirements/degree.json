@@ -1,0 +1,15 @@
+{
+  "source": "University of Waterloo Undergraduate Studies Calendar — Degree Requirements for all Math students, Table 1",
+  "label": "Four-Year Honours",
+  "minimum_units": 20.0,
+  "minimum_non_math_units": 5.0,
+  "maximum_failed_units": 2.0,
+  "minimum_cumulative_average": 60,
+  "math_subjects": ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"],
+  "excluded_subjects": ["COOP", "PD", "WKRPT"],
+  "notes": [
+    "Courses with the subject code COOP, PD and WKRPT do not count toward the minimum course units.",
+    "A course cross-listed with a math course counts as a math course whichever code it was taken under.",
+    "Co-op plans additionally require 2.5 COOP units and 2.5 PD units, which TrackR does not track."
+  ]
+}

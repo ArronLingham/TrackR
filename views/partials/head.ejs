@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title %> | TrackR</title>
+    <meta
+      name="description"
+      content="TrackR checks your University of Waterloo course list against your program requirements."
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="/styles/main.css?v=<%= assetVersion %>" rel="stylesheet" />
+  </head>
+
+  <body class="d-flex text-bg-dark">
+    <!-- The animated background gets its own fixed layer. It used to be the
+         <body> element itself, which made the whole document position:fixed
+         and left long pages with no way to scroll. -->
+    <div id="vanta-bg" aria-hidden="true"></div>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div
+      class="cover-container d-flex w-100 p-3 mx-auto flex-column<%= typeof wide !== 'undefined' && wide ? ' cover-container--wide' : '' %>"
+    >

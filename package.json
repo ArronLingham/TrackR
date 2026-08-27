@@ -1,0 +1,45 @@
+{
+  "name": "uwreq",
+  "version": "1.0.0",
+  "description": "Course requirement tracker to make sure you're on track to graduate :)",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "node --test",
+    "typecheck": "tsc --noEmit",
+    "data:fix-titles": "node scripts/data/fix-titles.js",
+    "data:courses": "node scripts/data/csv-to-json.js",
+    "scrape:one": "node scripts/scraper/scrape-one.js",
+    "scrape:index": "node scripts/scraper/scrape-index.js",
+    "scrape:all": "node scripts/scraper/scrape-all.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jovitta-seb/uwreq.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jovitta-seb/uwreq/issues"
+  },
+  "homepage": "https://github.com/jovitta-seb/uwreq#readme",
+  "dependencies": {
+    "@types/node": "^22.20.1",
+    "csv-parser": "^3.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.14",
+    "playwright": "^1.55.0",
+    "typescript": "^5.7.2"
+  }
+}

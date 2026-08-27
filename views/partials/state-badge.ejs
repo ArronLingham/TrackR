@@ -1,0 +1,8 @@
+<%
+  const LABELS = { met: "Met", in_progress: "In progress", unmet: "Not met" };
+  const ICONS = { met: "✓", in_progress: "◐", unmet: "✗" };
+  const key = state || "unmet";
+%>
+<span class="badge state-<%= key %>"<% if (key === 'in_progress') { %> title="Satisfied if you pass the courses you are enrolled in"<% } %>>
+  <span aria-hidden="true"><%= ICONS[key] %></span> <%= LABELS[key] %>
+</span>

@@ -1,0 +1,17 @@
+<% if (courses && courses.length) { %>
+  <% courses.forEach(function (course) { %>
+    <a
+      href="https://uwflow.com/course/<%= course.code.toLowerCase() %>"
+      target="_blank"
+      rel="noopener"
+      class="course-code"
+      data-code="<%= course.code %>"
+      title="<%= course.title || course.code %>"
+    ><%= (course.codes && course.codes.length ? course.codes.join(" / ") : course.code) %></a>
+  <% }); %>
+  <% if (typeof more !== 'undefined' && more > 0) { %>
+    <span class="course-more">+<%= more %> more</span>
+  <% } %>
+<% } else { %>
+  <span class="muted">None</span>
+<% } %>

@@ -1,0 +1,54 @@
+<%- include('partials/head', { title: 'About' }) %>
+<%- include('partials/header') %>
+
+<main class="px-3" id="main">
+  <div class="hero-box text-center">
+    <h1 class="homepage-title">About <span class="highlight">TrackR</span></h1>
+    <p class="lead px-4">
+      A course requirement tracker for University of Waterloo students, built to answer one
+      question: am I on track to graduate?
+    </p>
+
+    <div class="text-start about-body">
+      <h2>Where the requirements come from</h2>
+      <p>
+        Program requirements are transcribed from the
+        <a href="https://uwaterloo.ca/academic-calendar/undergraduate-studies/catalog" target="_blank" rel="noopener">
+          Undergraduate Studies Academic Calendar</a>, one JSON file per plan. Course data comes
+        from the same calendar's public course listings, and ratings come from
+        <a href="https://uwflow.com" target="_blank" rel="noopener">UWFlow</a>.
+      </p>
+
+      <h2>Programs covered</h2>
+      <ul>
+        <% programs.forEach(function (program) { %>
+          <li><%= program.label %></li>
+        <% }); %>
+      </ul>
+
+      <h2>What it does not do</h2>
+      <p>
+        TrackR checks the requirements a plan lists by name, plus the unit totals and cumulative
+        average minimum from Table 1. It does not check co-op or PD sequences, term-by-term
+        prerequisites, major averages (which are defined per plan), or academic standing. A plan
+        that has no breadth or depth requirement in the calendar simply will not show those
+        sections.
+      </p>
+      <p>
+        The GPA figures are an approximation. Waterloo reports averages only as percentages and
+        publishes no official conversion to a 4.0 scale.
+      </p>
+
+      <p class="constraint-note">
+        This is a student project, not an official University of Waterloo tool. Always confirm your
+        standing with an academic advisor.
+      </p>
+    </div>
+
+    <p class="mt-4">
+      <a class="btn btn-get-started fw-bold" href="/">Check your progress</a>
+    </p>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

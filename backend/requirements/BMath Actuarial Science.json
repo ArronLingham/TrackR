@@ -1,0 +1,487 @@
+{
+  "program": "BMath Actuarial Science",
+  "source": "University of Waterloo Undergraduate Studies Calendar — Actuarial Science",
+  "required_courses": [
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH237",
+          "title": "Calculus 3 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH247",
+          "title": "Calculus 3 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "AMATH250",
+          "title": "Introduction to Differential Equations",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH251",
+          "title": "Introduction to Differential Equations (Advanced Level)",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH350",
+          "title": "Differential Equations for Business and Economics",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "all_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "AFM101",
+          "title": "Introduction to Financial Accounting",
+          "credits": 0.5
+        },
+        {
+          "code": "ACTSC231",
+          "title": "Introductory Financial Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "ACTSC232",
+          "title": "Life Contingencies 1",
+          "credits": 0.5
+        },
+        {
+          "code": "ACTSC331",
+          "title": "Life Contingencies 2",
+          "credits": 0.5
+        },
+        {
+          "code": "ACTSC363",
+          "title": "Casualty and Health Insurance Mathematics 1",
+          "credits": 0.5
+        },
+        {
+          "code": "ACTSC372",
+          "title": "Investment Science and Corporate Finance",
+          "credits": 0.5
+        },
+        {
+          "code": "ACTSC431",
+          "title": "Casualty and Health Insurance Mathematics 2",
+          "credits": 0.5
+        },
+        {
+          "code": "ACTSC446",
+          "title": "Mathematics of Financial Markets",
+          "credits": 0.5
+        },
+        {
+          "code": "ECON101",
+          "title": "Introduction to Microeconomics",
+          "credits": 0.5
+        },
+        {
+          "code": "ECON102",
+          "title": "Introduction to Macroeconomics",
+          "credits": 0.5
+        },
+        {
+          "code": "MTHEL131",
+          "title": "Introduction to Actuarial Practice",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT330",
+          "title": "Mathematical Statistics",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT331",
+          "title": "Ap plied Linear Models",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT333",
+          "title": "Stochastic Processes 1",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "ENGL378",
+          "title": "Professional Communications in Statistics and Actuarial Science",
+          "credits": 0.5
+        },
+        {
+          "code": "MTHEL300",
+          "title": "Professional Communications in Statistics and Actuarial Science",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "STAT340",
+          "title": "Stochastic Simulation Methods",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT341",
+          "title": "Computational Statistics and Data Analysis",
+          "credits": 0.5
+        }
+      ]
+    }
+  ],
+  "elective_requirement": [
+    {
+      "type": "range_required",
+      "count": 2,
+      "exclusive": true,
+      "description": "Complete 2 additional 400-level ACTSC courses",
+      "level_ranges": [
+        "ACTSC4"
+      ]
+    },
+    {
+      "type": "n_required",
+      "count": 2,
+      "exclusive": true,
+      "description": "Complete 2 additional courses from any 300- or 400-level ACTSC course, AFM 424, STAT 431, STAT 433, STAT 441, or STAT 443",
+      "level_ranges": [
+        "ACTSC3",
+        "ACTSC4"
+      ],
+      "courses": [
+        {
+          "code": "AFM424",
+          "title": "Equity Investments",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT431",
+          "title": "Generalized Linear Models and their Ap plications",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT433",
+          "title": "Stochastic Processes 2",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT441",
+          "title": "Statistical Learning    Classification",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT443",
+          "title": "Forecasting",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "range_required",
+      "count": 1,
+      "exclusive": true,
+      "description": "Complete 1 additional 300- or 400-level math course from ACTSC, AMATH, CO, CS, MATBUS, MATH, PMATH, or STAT",
+      "level_ranges": [
+        "ACTSC3",
+        "ACTSC4",
+        "AMATH3",
+        "AMATH4",
+        "CO3",
+        "CO4",
+        "CS3",
+        "CS4",
+        "MATBUS3",
+        "MATBUS4",
+        "MATH3",
+        "MATH4",
+        "PMATH3",
+        "PMATH4",
+        "STAT3",
+        "STAT4"
+      ]
+    }
+  ],
+  "additional_requirement": [
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "CS115",
+          "title": "Introduction to Computer Science 1",
+          "credits": 0.5
+        },
+        {
+          "code": "CS135",
+          "title": "Designing  Functional Programs",
+          "credits": 0.5
+        },
+        {
+          "code": "CS145",
+          "title": "Designing  Functional Programs (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "CS116",
+          "title": "Introduction to Computer Science 2",
+          "credits": 0.5
+        },
+        {
+          "code": "CS136",
+          "title": "Elementary Algorithm Design and Data Abstraction",
+          "credits": 0.5
+        },
+        {
+          "code": "CS146",
+          "title": "Elementary Algorithm Design and Data Abstraction (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH135",
+          "title": "Algebra for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH145",
+          "title": "Algebra (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH106",
+          "title": "Ap plied Linear Algebra 1",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH136",
+          "title": "Linear Algebra 1 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH146",
+          "title": "Linear Algebra 1 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH127",
+          "title": "Calculus 1 for the Sciences",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH137",
+          "title": "Calculus 1 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH147",
+          "title": "Calculus 1 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH128",
+          "title": "Calculus 2 for the Sciences",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH138",
+          "title": "Calculus 2 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH148",
+          "title": "Calculus 2 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH235",
+          "title": "Linear Algebra 2 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH245",
+          "title": "Linear Algebra 2 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH237",
+          "title": "Calculus 3 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH239",
+          "title": "Introduction to Combinatorics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH247",
+          "title": "Calculus 3 (Advanced Level)",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH249",
+          "title": "Introduction to Combinatorics (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "STAT230",
+          "title": "Probability",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT240",
+          "title": "Probability (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "STAT231",
+          "title": "Statistics",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT241",
+          "title": "Statistics (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    }
+  ],
+  "communication_requirement": {
+    "list1": {
+      "description": "List 1",
+      "courses": [
+        {
+          "code": "COMMST100",
+          "title": "Interpersonal Communication",
+          "credits": 0.5
+        },
+        {
+          "code": "COMMST223",
+          "title": "Public Speaking",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS101R",
+          "title": "Oral Communications for Academic Purposes",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS102R",
+          "title": "Clear Communication in English Writing",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS129R",
+          "title": "Written Academic English",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL109",
+          "title": "Introduction to Academic Writing",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL129R",
+          "title": "Written Academic English",
+          "credits": 0.5
+        }
+      ]
+    },
+    "professional": {
+      "description": "Professional communications",
+      "courses": [
+        {
+          "code": "ENGL378",
+          "title": "Professional Communications in Statistics and Actuarial Science",
+          "credits": 0.5
+        }
+      ]
+    },
+    "options": [
+      {
+        "description": "One course from List 1 and ENGL 378 / MTHEL 300",
+        "requires": [
+          {
+            "list": "list1",
+            "count": 1
+          },
+          {
+            "list": "professional",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  }
+}

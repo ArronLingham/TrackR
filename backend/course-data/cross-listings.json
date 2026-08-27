@@ -1,0 +1,30 @@
+[
+  {
+    "codes": ["AMATH242", "CS371"],
+    "title": "Introduction to Computational Mathematics"
+  },
+  {
+    "codes": ["ENGL378", "MTHEL300"],
+    "title": "Professional Communications in Statistics and Actuarial Science"
+  },
+  {
+    "codes": ["AMATH382", "BIOL382"],
+    "title": "Computational Modelling of Cellular Systems"
+  },
+  {
+    "codes": ["ACTSC423", "AFM423"],
+    "title": "Topics in Financial Econometrics"
+  },
+  {
+    "codes": ["ACTSC471", "AFM476"],
+    "title": "Corporate Financial Decision Making"
+  },
+  {
+    "codes": ["ENGL129R", "EMLS129R"],
+    "title": "Written Academic English"
+  },
+  {
+    "codes": ["ECON100", "COMM103"],
+    "title": "Introduction to Economics"
+  }
+]

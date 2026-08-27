@@ -1,0 +1,776 @@
+{
+  "program": "BMath Computational Mathematics",
+  "source": "University of Waterloo Undergraduate Studies Calendar — Computational Mathematics",
+  "required_courses": [
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH237",
+          "title": "Calculus 3 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH247",
+          "title": "Calculus 3 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH239",
+          "title": "Introduction to Combinatorics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH249",
+          "title": "Introduction to Combinatorics (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "AMATH242",
+          "title": "Introduction to Computational Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "CS371",
+          "title": "Introduction to Computational Mathematics",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "all_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "CS230",
+          "title": "Introduction to Computers and Computer Systems",
+          "credits": 0.5
+        },
+        {
+          "code": "CS234",
+          "title": "Data Ty pes and Structures",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "n_required",
+      "count": 2,
+      "exclusive": false,
+      "description": "Complete 2 foundational courses with different subject codes: AMATH 250/251/350, CO 250/255, CS 245/245E or PMATH 330, CS 246/246E",
+      "rules": {
+        "min_distinct_subjects": 2
+      },
+      "courses": [
+        {
+          "code": "AMATH250",
+          "title": "Introduction to Differential Equations",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH251",
+          "title": "Introduction to Differential Equations (Advanced Level)",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH350",
+          "title": "Differential Equations for Business and Economics",
+          "credits": 0.5
+        },
+        {
+          "code": "CO250",
+          "title": "Introduction to Optimization",
+          "credits": 0.5
+        },
+        {
+          "code": "CO255",
+          "title": "Introduction to Optimization (Advanced Level)",
+          "credits": 0.5
+        },
+        {
+          "code": "CS245",
+          "title": "Logic and Computation",
+          "credits": 0.5
+        },
+        {
+          "code": "CS245E",
+          "title": "Logic and Computation (Enriched)",
+          "credits": 0.5
+        },
+        {
+          "code": "PMATH330",
+          "title": "Introduction to Mathematical Logic",
+          "credits": 0.5
+        },
+        {
+          "code": "CS246",
+          "title": "Object Oriented Software Development",
+          "credits": 0.5
+        },
+        {
+          "code": "CS246E",
+          "title": "Object Oriented Software Development (Enriched)",
+          "credits": 0.5
+        }
+      ],
+      "constraints": [
+        "Students who take CO 255 may count CO 450 or CO 466 as a core course instead of CO 353 or CO 367."
+      ]
+    },
+    {
+      "type": "n_required",
+      "count": 2,
+      "exclusive": false,
+      "description": "Complete 2 core courses from AMATH 342, CO 353/367, CS 475, PMATH 370, STAT 340/341",
+      "courses": [
+        {
+          "code": "AMATH342",
+          "title": "Computational Methods for Differential Equations",
+          "credits": 0.5
+        },
+        {
+          "code": "CO353",
+          "title": "Computational Discrete Optimization",
+          "credits": 0.5
+        },
+        {
+          "code": "CO367",
+          "title": "Nonlinear Optimization",
+          "credits": 0.5
+        },
+        {
+          "code": "CS475",
+          "title": "Computational Linear Algebra",
+          "credits": 0.5
+        },
+        {
+          "code": "PMATH370",
+          "title": "Chaos and Fractals",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT340",
+          "title": "Stochastic Simulation Methods",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT341",
+          "title": "Computational Statistics and Data Analysis",
+          "credits": 0.5
+        }
+      ]
+    }
+  ],
+  "elective_requirement": [
+    {
+      "type": "n_required",
+      "count": 4,
+      "exclusive": true,
+      "description": "Complete 4 additional courses from the core list or the Computational Mathematics elective list, using at least 2 different subject codes, at least 2 of which must be 400-level",
+      "rules": {
+        "min_distinct_subjects": 2,
+        "at_or_above": {
+          "level": 400,
+          "count": 2
+        }
+      },
+      "courses": [
+        {
+          "code": "AMATH342",
+          "title": "Computational Methods for Differential Equations",
+          "credits": 0.5
+        },
+        {
+          "code": "CO353",
+          "title": "Computational Discrete Optimization",
+          "credits": 0.5
+        },
+        {
+          "code": "CO367",
+          "title": "Nonlinear Optimization",
+          "credits": 0.5
+        },
+        {
+          "code": "CS475",
+          "title": "Computational Linear Algebra",
+          "credits": 0.5
+        },
+        {
+          "code": "PMATH370",
+          "title": "Chaos and Fractals",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT340",
+          "title": "Stochastic Simulation Methods",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT341",
+          "title": "Computational Statistics and Data Analysis",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH343",
+          "title": "Discrete Models in Ap plied Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH382",
+          "title": "Computational Modelling  of Cellular Systems",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH383",
+          "title": "Introduction to Mathematical Biology",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH391",
+          "title": "Data Analysis with Fourier and Wavelet Methods",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH442",
+          "title": "Computational Methods for Partial Differential Equations",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH455",
+          "title": "Control Theory",
+          "credits": 0.5
+        },
+        {
+          "code": "AMATH477",
+          "title": "Stochastic Processes for Ap plied Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "CO351",
+          "title": "Network Flow Theory",
+          "credits": 0.5
+        },
+        {
+          "code": "CO370",
+          "title": "Deterministic OR Models",
+          "credits": 0.5
+        },
+        {
+          "code": "CO372",
+          "title": "Portfolio Optimization Models",
+          "credits": 0.5
+        },
+        {
+          "code": "CO450",
+          "title": "Combinatorial Optimization",
+          "credits": 0.5
+        },
+        {
+          "code": "CO452",
+          "title": "Integer Programming",
+          "credits": 0.5
+        },
+        {
+          "code": "CO454",
+          "title": "Scheduling",
+          "credits": 0.5
+        },
+        {
+          "code": "CO456",
+          "title": "Introduction to Game Theory",
+          "credits": 0.5
+        },
+        {
+          "code": "CO463",
+          "title": "Convex Optimization and Analysis",
+          "credits": 0.5
+        },
+        {
+          "code": "CO466",
+          "title": "Continuous Optimization",
+          "credits": 0.5
+        },
+        {
+          "code": "CO471",
+          "title": "Semidefinite Optimization",
+          "credits": 0.5
+        },
+        {
+          "code": "CO485",
+          "title": "The Mathematics of Public Key Cry p tography",
+          "credits": 0.5
+        },
+        {
+          "code": "CO487",
+          "title": "Ap plied Cry p tography",
+          "credits": 0.5
+        },
+        {
+          "code": "CS341",
+          "title": "Algorithms",
+          "credits": 0.5
+        },
+        {
+          "code": "CS431",
+          "title": "Data Intensive Distributed Analytics",
+          "credits": 0.5
+        },
+        {
+          "code": "CS451",
+          "title": "Data Intensive Distributed Computing",
+          "credits": 0.5
+        },
+        {
+          "code": "CS466",
+          "title": "Algorithm Design and Analysis",
+          "credits": 0.5
+        },
+        {
+          "code": "CS476",
+          "title": "Numerical Computation for Financial Modelling",
+          "credits": 0.5
+        },
+        {
+          "code": "CS479",
+          "title": "Neural Networks",
+          "credits": 0.5
+        },
+        {
+          "code": "CS480",
+          "title": "Introduction to Machine Learning",
+          "credits": 0.5
+        },
+        {
+          "code": "CS482",
+          "title": "Computational Techniques in Biological Sequence Analysis",
+          "credits": 0.5
+        },
+        {
+          "code": "CS485",
+          "title": "Statistical and Computational Foundations of Machine Learning",
+          "credits": 0.5
+        },
+        {
+          "code": "CS487",
+          "title": "Introduction to Symbolic Computation",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT440",
+          "title": "Computational Inference",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT441",
+          "title": "Statistical Learning    Classification",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT442",
+          "title": "Data Visualization",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT444",
+          "title": "Statistical Learning    Advanced Regression",
+          "credits": 0.5
+        }
+      ],
+      "constraints": [
+        "BIOL 382 is cross-listed with AMATH 382 and counts as an AMATH course for the subject-code rule."
+      ]
+    }
+  ],
+  "additional_requirement": [
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "CS115",
+          "title": "Introduction to Computer Science 1",
+          "credits": 0.5
+        },
+        {
+          "code": "CS135",
+          "title": "Designing  Functional Programs",
+          "credits": 0.5
+        },
+        {
+          "code": "CS145",
+          "title": "Designing  Functional Programs (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "CS116",
+          "title": "Introduction to Computer Science 2",
+          "credits": 0.5
+        },
+        {
+          "code": "CS136",
+          "title": "Elementary Algorithm Design and Data Abstraction",
+          "credits": 0.5
+        },
+        {
+          "code": "CS146",
+          "title": "Elementary Algorithm Design and Data Abstraction (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH135",
+          "title": "Algebra for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH145",
+          "title": "Algebra (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH106",
+          "title": "Ap plied Linear Algebra 1",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH136",
+          "title": "Linear Algebra 1 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH146",
+          "title": "Linear Algebra 1 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH127",
+          "title": "Calculus 1 for the Sciences",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH137",
+          "title": "Calculus 1 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH147",
+          "title": "Calculus 1 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH128",
+          "title": "Calculus 2 for the Sciences",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH138",
+          "title": "Calculus 2 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH148",
+          "title": "Calculus 2 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH235",
+          "title": "Linear Algebra 2 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH245",
+          "title": "Linear Algebra 2 (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "MATH237",
+          "title": "Calculus 3 for Honours Mathematics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH239",
+          "title": "Introduction to Combinatorics",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH247",
+          "title": "Calculus 3 (Advanced Level)",
+          "credits": 0.5
+        },
+        {
+          "code": "MATH249",
+          "title": "Introduction to Combinatorics (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "STAT230",
+          "title": "Probability",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT240",
+          "title": "Probability (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "one_required",
+      "exclusive": false,
+      "courses": [
+        {
+          "code": "STAT231",
+          "title": "Statistics",
+          "credits": 0.5
+        },
+        {
+          "code": "STAT241",
+          "title": "Statistics (Advanced Level)",
+          "credits": 0.5
+        }
+      ]
+    },
+    {
+      "type": "n_required",
+      "count": 3,
+      "exclusive": true,
+      "description": "Complete 3 non-math courses (1.5 units) from exactly one of AE, BIOL, BME, CHE, CHEM, CIVE, EARTH, ECE, ECON, ENVE, GEOE, ME, MNS, MSCI, MTE, NE, PHYS, SYDE — at least one at the 200-level or higher",
+      "rules": {
+        "single_subject": true,
+        "at_or_above": {
+          "level": 200,
+          "count": 1
+        }
+      },
+      "category_ranges": [
+        "AE",
+        "BIOL",
+        "BME",
+        "CHE",
+        "CHEM",
+        "CIVE",
+        "EARTH",
+        "ECE",
+        "ECON",
+        "ENVE",
+        "GEOE",
+        "ME",
+        "MNS",
+        "MSCI",
+        "MTE",
+        "NE",
+        "PHYS",
+        "SYDE"
+      ],
+      "constraints": [
+        "Other course concentrations may be eligible subject to approval by a Computational Mathematics academic advisor."
+      ]
+    }
+  ],
+  "communication_requirement": {
+    "list1": {
+      "description": "List 1",
+      "courses": [
+        {
+          "code": "COMMST100",
+          "title": "Interpersonal Communication",
+          "credits": 0.5
+        },
+        {
+          "code": "COMMST223",
+          "title": "Public Speaking",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS101R",
+          "title": "Oral Communications for Academic Purposes",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS102R",
+          "title": "Clear Communication in English Writing",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS129R",
+          "title": "Written Academic English",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL109",
+          "title": "Introduction to Academic Writing",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL129R",
+          "title": "Written Academic English",
+          "credits": 0.5
+        }
+      ]
+    },
+    "list2": {
+      "description": "List 2",
+      "courses": [
+        {
+          "code": "COMMST225",
+          "title": "Interviewing",
+          "credits": 0.5
+        },
+        {
+          "code": "COMMST227",
+          "title": "Leadership",
+          "credits": 0.5
+        },
+        {
+          "code": "COMMST228",
+          "title": "Public Communication",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS103R",
+          "title": "Effective English Pronunciation",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS104R",
+          "title": "Reading and Listening for Academic Purposes",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS110R",
+          "title": "Communicating in Canadian Academic Contexts",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL101B",
+          "title": "Introduction to Rhetorical Studies",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL108B",
+          "title": "Global English Literatures",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL108D",
+          "title": "Digital Lives",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL119",
+          "title": "Communications in Mathematics and Computer Science",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL208B",
+          "title": "Science Fiction",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL209",
+          "title": "Advanced Academic Writing",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL210E",
+          "title": "Genres of Technical Communication",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL210F",
+          "title": "Genres of Business Communication",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL378",
+          "title": "Professional Communications in Statistics and Actuarial Science",
+          "credits": 0.5
+        }
+      ]
+    },
+    "options": [
+      {
+        "description": "Option 1: Two from List 1",
+        "requires": [
+          {
+            "list": "list1",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "description": "Option 2: One from List 1 and one from List 2",
+        "requires": [
+          {
+            "list": "list1",
+            "count": 1
+          },
+          {
+            "list": "list2",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  }
+}

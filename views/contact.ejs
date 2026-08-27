@@ -1,0 +1,54 @@
+<%- include('partials/head', { title: 'Contact' }) %>
+<%- include('partials/header') %>
+
+<main class="px-3" id="main">
+  <div class="hero-box text-center">
+    <% if (typeof sent !== 'undefined' && sent) { %>
+      <div class="alert alert-success text-start" role="status">
+        Thanks — your message was received and recorded against
+        <strong><%= sent.email %></strong>. TrackR has no mail delivery configured yet, so a
+        maintainer will pick it up from the server log rather than replying automatically.
+      </div>
+    <% } %>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-danger text-start" role="alert">
+        <strong>Check your entry:</strong> <%= error %>
+      </div>
+    <% } %>
+
+    <h1 class="homepage-title">Get in touch with <span class="highlight">TrackR</span></h1>
+    <p class="lead px-4">Have questions or feedback? We'd love to hear from you.</p>
+
+    <form action="/contact" method="POST" class="form-container text-start">
+      <div class="form-group-wrapper">
+        <label for="name" class="form-label">Your name</label>
+        <input type="text" class="form-control" id="name" name="name"
+               value="<%= values.name %>" placeholder="Enter your name" required />
+      </div>
+
+      <div class="form-group-wrapper">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" name="email"
+               value="<%= values.email %>" placeholder="your.email@example.com" required />
+      </div>
+
+      <div class="form-group-wrapper">
+        <label for="subject" class="form-label">Subject</label>
+        <input type="text" class="form-control" id="subject" name="subject"
+               value="<%= values.subject %>" placeholder="What's this about?" required />
+      </div>
+
+      <div class="form-group-wrapper">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="6"
+                  placeholder="Tell us what's on your mind..." required><%= values.message %></textarea>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-get-started fw-bold">Send message</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

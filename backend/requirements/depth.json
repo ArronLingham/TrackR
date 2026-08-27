@@ -1,0 +1,30 @@
+{
+  "units": 1.5,
+  "options": [
+    {
+      "id": "option1",
+      "description": "1.5 units (3 courses) with the same subject, including at least 0.5 units at the 300-level or higher",
+      "rules": {
+        "sameSubject": true,
+        "minCourses": 3,
+        "minUnits": 1.5,
+        "require300LevelOrHigher": true
+      }
+    },
+    {
+      "id": "option2",
+      "description": "1.5 units (3 courses) with the same subject forming a prerequisite chain of length three",
+      "rules": {
+        "sameSubject": true,
+        "minCourses": 3,
+        "minUnits": 1.5,
+        "requirePrerequisiteChain": 3
+      }
+    }
+  ],
+  "examples": [
+    ["ECON 101", "ECON 201", "ECON 361"],
+    ["PHYS 121", "PHYS 122", "PHYS 375"],
+    ["PSYCH 101", "PSYCH 211", "PSYCH 315"]
+  ]
+}

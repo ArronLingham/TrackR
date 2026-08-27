@@ -1,0 +1,339 @@
+{
+  "program": "BCS Data Science",
+  "required_courses": [
+    {
+      "type": "all_required",
+      "courses": [
+        { "code": "CS136L", "title": "Tools and Techniques for Software Development", "credits": 0.25 },
+        { "code": "CS341", "title": "Algorithms", "credits": 0.5 },
+        { "code": "CS348", "title": "Introduction to Database Management", "credits": 0.5 },
+        { "code": "CS350", "title": "Operating Systems", "credits": 0.5 },
+        { "code": "CS451", "title": "Data-Intensive Distributed Computing", "credits": 0.5 },
+        { "code": "STAT330", "title": "Mathematical Statistics", "credits": 0.5 },
+        { "code": "STAT331", "title": "Applied Linear Models", "credits": 0.5 },
+        { "code": "STAT341", "title": "Computational Statistics and Data Analysis", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS115", "title": "Introduction to Computer Science 1", "credits": 0.5 },
+        { "code": "CS135", "title": "Designing Functional Programs", "credits": 0.5 },
+        { "code": "CS145", "title": "Designing Functional Programs (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS136", "title": "Elementary Algorithm Design and Data Abstraction", "credits": 0.5 },
+        { "code": "CS146", "title": "Elementary Algorithm Design and Data Abstraction (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS240", "title": "Data Structures and Data Management", "credits": 0.5 },
+        { "code": "CS240E", "title": "Data Structures and Data Management (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS241", "title": "Foundations of Sequential Programs", "credits": 0.5 },
+        { "code": "CS241E", "title": "Foundations of Sequential Programs (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS245", "title": "Logic and Computation", "credits": 0.5 },
+        { "code": "CS245E", "title": "Logic and Computation (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS246", "title": "Object-Oriented Software Development", "credits": 0.5 },
+        { "code": "CS246E", "title": "Object-Oriented Software Development (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS251", "title": "Computer Organization and Design", "credits": 0.5 },
+        { "code": "CS251E", "title": "Computer Organization and Design (Enriched)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS480", "title": "Introduction to Machine Learning", "credits": 0.5 },
+        { "code": "CS485", "title": "Statistical and Computational Foundations of Machine Learning", "credits": 0.5 },
+        { "code": "CS486", "title": "Introduction to Artificial Intelligence", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "CS448", "title": "Database Systems Implementation", "credits": 0.5 },
+        { "code": "CS454", "title": "Distributed Systems", "credits": 0.5 },
+        { "code": "CS480", "title": "Introduction to Machine Learning", "credits": 0.5 },
+        { "code": "CS484", "title": "Computational Vision", "credits": 0.5 },
+        { "code": "CS485", "title": "Statistical and Computational Foundations of Machine Learning", "credits": 0.5 },
+        { "code": "CS486", "title": "Introduction to Artificial Intelligence", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH127", "title": "Calculus 1 for the Sciences", "credits": 0.5 },
+        { "code": "MATH137", "title": "Calculus 1 for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH147", "title": "Calculus 1 (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH128", "title": "Calculus 2 for the Sciences", "credits": 0.5 },
+        { "code": "MATH138", "title": "Calculus 2 for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH148", "title": "Calculus 2 (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH135", "title": "Algebra for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH145", "title": "Algebra (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH136", "title": "Linear Algebra 1 for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH146", "title": "Linear Algebra 1 (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH235", "title": "Linear Algebra 2 for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH245", "title": "Linear Algebra 2 (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH237", "title": "Calculus 3 for Honours Mathematics", "credits": 0.5 },
+        { "code": "MATH247", "title": "Calculus 3 (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "MATH239", "title": "Introduction to Combinatorics", "credits": 0.5 },
+        { "code": "MATH249", "title": "Introduction to Combinatorics (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "STAT230", "title": "Probability", "credits": 0.5 },
+        { "code": "STAT240", "title": "Probability (Advanced Level)", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "one_required",
+      "courses": [
+        { "code": "STAT231", "title": "Statistics", "credits": 0.5 },
+        { "code": "STAT241", "title": "Statistics (Advanced Level)", "credits": 0.5 }
+      ]
+    }
+  ],
+  "elective_requirement": [
+    {
+      "type": "n_required",
+      "count": 2,
+      "courses": [
+        { "code": "STAT431", "title": "Generalized Linear Models and their Applications", "credits": 0.5 },
+        { "code": "STAT440", "title": "Computational Inference", "credits": 0.5 },
+        { "code": "STAT441", "title": "Statistical Learning - Classification", "credits": 0.5 },
+        { "code": "STAT442", "title": "Data Visualization", "credits": 0.5 },
+        { "code": "STAT443", "title": "Forecasting", "credits": 0.5 },
+        { "code": "STAT444", "title": "Statistical Learning - Advanced Regression", "credits": 0.5 }
+      ]
+    },
+    {
+      "type": "range_required",
+      "count": 1,
+      "range": ["CS340-CS398", "CS440-CS489"],
+      "description": "Complete 1 additional CS courses chosen from CS340-CS398, CS440-CS489"
+    },
+    {
+      "type": "one_group_required",
+      "exclusive": true,
+      "groups": [
+        {
+          "type": "range_required",
+          "count": 1,
+          "range": ["CS440-CS498"],
+          "level_ranges": ["CS6", "CS7"],
+          "description": "Complete 1 course from CS440-CS498, or any CS course at the 600- or 700-level",
+          "constraints": [
+            "See Additional Constraints for 600/700 level courses"
+          ]
+        },
+        {
+          "type": "one_required",
+          "courses": [
+            {
+              "code": "CO487",
+              "title": "Applied Cryptography",
+              "credits": 0.5
+            },
+            {
+              "code": "CS499T",
+              "title": "Honours Thesis",
+              "credits": 0.5
+            },
+            {
+              "code": "STAT440",
+              "title": "Computational Inference",
+              "credits": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "communication_requirement": {
+    "list1": {
+      "description": "List 1",
+      "courses": [
+        {
+          "code": "COMMST100",
+          "title": "Interpersonal Communication",
+          "credits": 0.5
+        },
+        { "code": "COMMST223", "title": "Public Speaking", "credits": 0.5 },
+        {
+          "code": "EMLS101R",
+          "title": "Oral Communications for Academic Purposes",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS102R",
+          "title": "Clear Communication in English Writing",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS129R",
+          "title": "Written Academic English",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL109",
+          "title": "Introduction to Academic Writing",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL129R",
+          "title": "Written Academic English",
+          "credits": 0.5
+        }
+      ]
+    },
+    "list2": {
+      "description": "List 2",
+      "courses": [
+        { "code": "COMMST225", "title": "Interviewing", "credits": 0.5 },
+        { "code": "COMMST227", "title": "Leadership", "credits": 0.5 },
+        {
+          "code": "COMMST228",
+          "title": "Public Communication",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS103R",
+          "title": "Effective English Pronunciation",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS104R",
+          "title": "Reading and Listening for Academic Purposes",
+          "credits": 0.5
+        },
+        {
+          "code": "EMLS110R",
+          "title": "Communicating in Canadian Academic Contexts",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL101B",
+          "title": "Introduction to Rhetorical Studies",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL108B",
+          "title": "Global English Literatures",
+          "credits": 0.5
+        },
+        { "code": "ENGL108D", "title": "Digital Lives", "credits": 0.5 },
+        {
+          "code": "ENGL119",
+          "title": "Communications in Mathematics and Computer Science",
+          "credits": 0.5
+        },
+        { "code": "ENGL208B", "title": "Science Fiction", "credits": 0.5 },
+        {
+          "code": "ENGL209",
+          "title": "Advanced Academic Writing",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL210E",
+          "title": "Genres of Technical Communication",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL210F",
+          "title": "Genres of Business Communication",
+          "credits": 0.5
+        },
+        {
+          "code": "ENGL378",
+          "title": "Professional Communications in Statistics and Actuarial Science",
+          "credits": 0.5
+        }
+      ]
+    },
+    "options": [
+      {
+        "description": "Option 1: Two from List 1",
+        "requires": [{ "list": "list1", "count": 2 }]
+      },
+      {
+        "description": "Option 2: One from List 1 and one from List 2",
+        "requires": [
+          { "list": "list1", "count": 1 },
+          { "list": "list2", "count": 1 }
+        ]
+      }
+    ]
+  },
+  "breadth_requirement": {
+    "units": 3.0,
+    "description": "Humanities: 1.0 units, Social Sciences: 1.0 unit, Pure Sciences: 0.5 unit, Applied Sciences: 0.5 unit",
+    "required_units": {
+      "humanities": 1.0,
+      "social_sciences": 1.0,
+      "pure_sciences": 0.5,
+      "applied_sciences": 0.5
+    },
+    "source": "breadth.json"
+  },
+  "depth_requirement": {
+    "units": 1.5,
+    "description": "1.5 units with the same subject, including at least 0.5 unit at 300-level or higher /  1.5 units with the same subject forming a prerequisite chain of length three",
+    "source": "depth.json"
+  }
+}

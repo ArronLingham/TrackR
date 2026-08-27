@@ -1,0 +1,15 @@
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/header') %>
+
+<main class="px-3" id="main">
+  <div class="hero-box text-center">
+    <h1 class="homepage-title"><span class="highlight"><%= status %></span></h1>
+    <h2 class="h4"><%= heading %></h2>
+    <p class="lead px-4"><%= detail %></p>
+    <p class="mt-4">
+      <a class="btn btn-get-started fw-bold" href="/">Back to TrackR</a>
+    </p>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

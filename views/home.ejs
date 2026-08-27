@@ -1,0 +1,72 @@
+<%- include('partials/head', { title: 'Home' }) %>
+<%- include('partials/header') %>
+
+<main class="px-3" id="main">
+  <div class="hero-box text-center">
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-danger alert-dismissible fade show text-start" role="alert" tabindex="-1">
+        <strong>Check your entry:</strong> <%= error %>
+        <% if (typeof unknownCourses !== 'undefined' && unknownCourses.length) { %>
+          <ul class="mb-0 mt-2">
+            <% unknownCourses.forEach(function (code) { %>
+              <li><code><%= code %></code></li>
+            <% }); %>
+          </ul>
+        <% } %>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="alert"
+          aria-label="Dismiss this message"
+        ></button>
+      </div>
+    <% } %>
+
+    <div class="welcome-box">
+      <h1 class="homepage-title">Welcome to <span class="highlight">TrackR</span></h1>
+      <p class="lead px-4">
+        Paste your transcript. TrackR works out what you've met, what's left, your averages and
+        your credits.
+      </p>
+
+      <form action="/submit" method="POST" class="form-container">
+        <div class="form-group-wrapper text-start">
+          <label for="major" class="form-label">Select your program</label>
+          <select class="form-select" id="major" name="major" required>
+            <option value="">-- Choose a program --</option>
+            <% programs.forEach(function (program) { %>
+              <option
+                value="<%= program.id %>"
+                <%= values.major === program.id ? 'selected' : '' %>
+              ><%= program.label %></option>
+            <% }); %>
+          </select>
+        </div>
+
+        <div class="form-group-wrapper text-start">
+          <label for="courses" class="form-label">Paste your transcript</label>
+          <textarea
+            class="form-control transcript-input"
+            id="courses"
+            name="courses"
+            rows="12"
+            placeholder="Paste your Quest unofficial transcript here — or just list courses: CS135, MATH137, STAT230"
+            aria-describedby="courses-help"
+            required
+          ><%= values.courses %></textarea>
+          <div id="courses-help" class="form-text">
+            Whole transcript, a grades table, or a plain list — all fine. Spacing and capitalisation
+            don't matter. Include grades and units to get averages and credit totals; leave them out
+            and you'll still get your requirements.
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-lg btn-get-started fw-bold">Check my progress</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
