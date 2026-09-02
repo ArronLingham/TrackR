@@ -25,26 +25,36 @@ const round2 = (value) => (value === null ? null : Math.round(value * 100) / 100
  *
  * @param {{terms: any[], attempts: TranscriptEntry[], hasGrades: boolean}} transcript
  */
-export function summarizeAcademics(transcript) {
+export function summarizeAcademics(transcript, plannedCourses = []) {
   const rules = degreeRules();
   const excluded = new Set(rules.excluded_subjects ?? []);
   const mathSubjects = new Set(rules.math_subjects ?? []);
 
   // COOP, PD and WKRPT courses do not count toward the degree unit minimum.
   const counted = transcript.attempts.filter((entry) => !excluded.has(subjectOf(entry.code)));
-  const isMath = (entry) => mathSubjects.has(subjectOf(entry.code));
+  const isMath = (entry) => mathSubjects.has(subjectOf(entry.code || entry));
+  const isMathCode = (code) => mathSubjects.has(subjectOf(code));
 
   const sumUnits = (list) => list.reduce((total, entry) => total + entry.units, 0);
 
   const earned = counted.filter((entry) => entry.grade.earnsCredit);
   const inProgress = counted.filter((entry) => entry.grade.inProgress);
   const failed = counted.filter((entry) => entry.grade.failed);
+  
+  // Exclude non-credit subjects from planned courses
+  const countedPlanned = plannedCourses.filter(code => !excluded.has(subjectOf(code)));
 
   const unitsEarned = sumUnits(earned);
   const unitsInProgress = sumUnits(inProgress);
   const unitsFailed = sumUnits(failed);
+  // Default to 0.5 units for planned courses
+  const unitsPlanned = countedPlanned.length * 0.5;
+
   const nonMathEarned = sumUnits(earned.filter((entry) => !isMath(entry)));
   const mathEarned = sumUnits(earned.filter(isMath));
+  
+  const mathPlanned = countedPlanned.filter(isMathCode).length * 0.5;
+  const nonMathPlanned = countedPlanned.filter(code => !isMathCode(code)).length * 0.5;
 
   const cumulative = weightedAverage(counted);
   const mathAverage = weightedAverage(counted.filter(isMath));
@@ -78,19 +88,23 @@ export function summarizeAcademics(transcript) {
       label: rules.label,
       earned: round2(unitsEarned),
       inProgress: round2(unitsInProgress),
+      planned: round2(unitsPlanned),
       failed: round2(unitsFailed),
       required: rules.minimum_units,
       remaining: round2(Math.max(0, rules.minimum_units - unitsEarned)),
       remainingAfterTerm: round2(Math.max(0, rules.minimum_units - unitsEarned - unitsInProgress)),
+      remainingAfterPlanned: round2(Math.max(0, rules.minimum_units - unitsEarned - unitsInProgress - unitsPlanned)),
       percent: Math.min(100, Math.round((unitsEarned / rules.minimum_units) * 100)),
       math: {
         earned: round2(mathEarned),
+        planned: round2(mathPlanned),
         required: rules.minimum_math_units,
         remaining: round2(Math.max(0, rules.minimum_math_units - mathEarned)),
         met: mathEarned >= rules.minimum_math_units,
       },
       nonMath: {
         earned: round2(nonMathEarned),
+        planned: round2(nonMathPlanned),
         required: rules.minimum_non_math_units,
         remaining: round2(Math.max(0, rules.minimum_non_math_units - nonMathEarned)),
         met: nonMathEarned >= rules.minimum_non_math_units,

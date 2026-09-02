@@ -145,7 +145,7 @@ router.post("/submit", async (req, res) => {
     progress,
     summary: summarize(progress),
     outstanding: outstanding(progress),
-    academics: summarizeAcademics(transcript),
+    academics: summarizeAcademics(transcript, planned),
     transcript,
     userCourses: rawCourses.trim(),
     plannedCourses: plannedCourses.trim(),
@@ -188,7 +188,7 @@ router.post("/contact", (req, res) => {
 });
 
 router.post("/api/progress", (req, res) => {
-  const { major, completed = [], inProgress = [], planned = [] } = req.body;
+  const { major, completed = [], inProgress = [], planned = [], transcriptRaw = "" } = req.body;
 
   if (!isKnownProgram(major)) {
     return res.status(400).json({ error: "Unknown program" });
@@ -196,13 +196,28 @@ router.post("/api/progress", (req, res) => {
 
   const progress = checkMajorProgress(major, { completed, inProgress, planned });
   
-  // Note: academics summary doesn't support "planned" yet, so we just use completed & inProgress
-  // We can just return the progress for now.
-  const titles = buildCourseTitles(progress, null);
+  // We need to parse transcript to get the academics summary, or reconstruct it
+  let transcript = parseTranscript("");
+  if (transcriptRaw) {
+    transcript = parseTranscript(transcriptRaw);
+  } else {
+    // Reconstruct a dummy transcript if raw is not provided
+    transcript = {
+      hasGrades: false,
+      terms: [],
+      attempts: completed.map(code => ({ code, grade: { earnsCredit: true }, units: 0.5 }))
+        .concat(inProgress.map(code => ({ code, grade: { inProgress: true }, units: 0.5 })))
+    };
+  }
+
+  const academics = summarizeAcademics(transcript, planned);
+  const titles = buildCourseTitles(progress, transcript);
+  
   res.json({
     progress,
     summary: summarize(progress),
     outstanding: outstanding(progress),
+    academics,
     courseTitles: titles,
     coursePrereqs: buildCoursePrereqs(titles),
   });

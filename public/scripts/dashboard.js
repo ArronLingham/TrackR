@@ -42,11 +42,47 @@ function formatLabel(key) {
   return labels[key] || key.replace(/_/g, " ");
 }
 
-// 1. Render Metrics
 function renderMetrics() {
   const ac = state.academics;
-  document.getElementById('metric-credits').textContent = ac.units.earned.toFixed(1) + ' / ' + ac.units.required.toFixed(1);
-  document.getElementById('metric-math-credits').textContent = ac.units.math.earned.toFixed(1) + ' / ' + ac.units.math.required.toFixed(1);
+  
+  const creditsEl = document.getElementById('metric-credits');
+  const mathCreditsEl = document.getElementById('metric-math-credits');
+
+  const baseCredits = `${ac.units.earned.toFixed(1)} / ${ac.units.required.toFixed(1)}`;
+  const plannedCredits = `${(ac.units.earned + ac.units.planned).toFixed(1)} / ${ac.units.required.toFixed(1)}`;
+  
+  const baseMath = `${ac.units.math.earned.toFixed(1)} / ${ac.units.math.required.toFixed(1)}`;
+  const plannedMath = `${(ac.units.math.earned + ac.units.math.planned).toFixed(1)} / ${ac.units.math.required.toFixed(1)}`;
+
+  creditsEl.textContent = baseCredits;
+  mathCreditsEl.textContent = baseMath;
+
+  // Total credits hover
+  if (ac.units.planned > 0) {
+    creditsEl.style.cursor = 'help';
+    creditsEl.title = 'Includes planned courses';
+    creditsEl.onmouseenter = () => creditsEl.textContent = plannedCredits;
+    creditsEl.onmouseleave = () => creditsEl.textContent = baseCredits;
+  } else {
+    creditsEl.style.cursor = 'default';
+    creditsEl.title = '';
+    creditsEl.onmouseenter = null;
+    creditsEl.onmouseleave = null;
+  }
+
+  // Math credits hover
+  if (ac.units.math.planned > 0) {
+    mathCreditsEl.style.cursor = 'help';
+    mathCreditsEl.title = 'Includes planned math courses';
+    mathCreditsEl.onmouseenter = () => mathCreditsEl.textContent = plannedMath;
+    mathCreditsEl.onmouseleave = () => mathCreditsEl.textContent = baseMath;
+  } else {
+    mathCreditsEl.style.cursor = 'default';
+    mathCreditsEl.title = '';
+    mathCreditsEl.onmouseenter = null;
+    mathCreditsEl.onmouseleave = null;
+  }
+
   document.getElementById('metric-cum-avg').textContent = ac.averages.cumulative ? ac.averages.cumulative.toFixed(1) + '%' : '--';
   document.getElementById('metric-major-avg').textContent = ac.averages.math ? ac.averages.math.toFixed(1) + '%' : '--';
 }
@@ -414,7 +450,8 @@ window.reEvaluateProgress = async function() {
         major: state.major,
         completed,
         inProgress,
-        planned
+        planned,
+        transcriptRaw: state.userCourses
       })
     });
     const data = await res.json();
@@ -422,12 +459,16 @@ window.reEvaluateProgress = async function() {
       state.progress = data.progress;
       state.summary = data.summary;
       state.outstanding = data.outstanding;
+      if (data.academics) {
+        state.academics = data.academics;
+      }
       if (data.courseTitles) {
         state.courseTitles = { ...state.courseTitles, ...data.courseTitles };
       }
       if (data.coursePrereqs) {
         state.coursePrereqs = { ...state.coursePrereqs, ...data.coursePrereqs };
       }
+      renderMetrics();
       renderRequirements();
       renderCalendar();
     }
