@@ -6,6 +6,7 @@ import { checkMajorProgress, outstanding, summarize } from "../domain/progress.j
 import { get as getCourse } from "../data/catalog.js";
 import { readJSON } from "../data/json.js";
 import { PATHS } from "../data/paths.js";
+import { getProfile, updateProfile } from "../db.js";
 
 const router = express.Router();
 const prereqsData = readJSON(PATHS.prereqs);
@@ -46,16 +47,25 @@ function renderHome(res, status, locals) {
   res.status(status).render("home", {
     activePage: "home",
     programs: listPrograms(),
-    values: { major: "", courses: "" },
+    values: { major: "", courses: "", planned_courses: "", coops: "" },
     ...locals,
   });
 }
 
-router.get("/", (req, res) => {
-  renderHome(res, 200, {});
+router.get("/", async (req, res) => {
+  const profile = await getProfile();
+  renderHome(res, 200, {
+    values: {
+      major: profile.major,
+      courses: profile.past_courses,
+      planned_courses: profile.planned_courses,
+      coops: profile.coops
+    }
+  });
 });
 
 router.get("/features", (req, res) => {
+
   res.render("features", { activePage: "features" });
 });
 
@@ -70,10 +80,12 @@ router.get("/contact", (req, res) => {
   });
 });
 
-router.post("/submit", (req, res) => {
+router.post("/submit", async (req, res) => {
   const major = typeof req.body.major === "string" ? req.body.major.trim() : "";
   const rawCourses = typeof req.body.courses === "string" ? req.body.courses : "";
-  const values = { major, courses: rawCourses };
+  const plannedCourses = typeof req.body.planned_courses === "string" ? req.body.planned_courses : "";
+  const coops = typeof req.body.coops === "string" ? req.body.coops : "";
+  const values = { major, courses: rawCourses, planned_courses: plannedCourses, coops };
 
   // `major` reaches a filesystem path, so it is checked against the known
   // programs rather than trusted from the form.
@@ -105,14 +117,25 @@ router.post("/submit", (req, res) => {
     });
   }
 
+  // Save the profile successfully
+  await updateProfile({
+    major,
+    past_courses: rawCourses,
+    planned_courses: plannedCourses,
+    coops
+  });
+
   const completed = transcript.entries
     .filter((entry) => entry.grade.earnsCredit)
     .map((entry) => entry.code);
   const inProgress = transcript.entries
     .filter((entry) => entry.grade.inProgress)
     .map((entry) => entry.code);
+  
+  // Basic parsing for planned courses (just comma/newline separated list of codes for now)
+  const planned = plannedCourses.split(/[\s,]+/).map(c => c.trim().toUpperCase()).filter(c => c.length > 0);
 
-  const progress = checkMajorProgress(major, { completed, inProgress });
+  const progress = checkMajorProgress(major, { completed, inProgress, planned });
   const titles = buildCourseTitles(progress, transcript);
 
   res.render("dashboard", {
@@ -125,6 +148,8 @@ router.post("/submit", (req, res) => {
     academics: summarizeAcademics(transcript),
     transcript,
     userCourses: rawCourses.trim(),
+    plannedCourses: plannedCourses.trim(),
+    coops: coops.trim(),
     courseTitles: titles,
     coursePrereqs: buildCoursePrereqs(titles),
   });

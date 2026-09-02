@@ -44,12 +44,12 @@
         </div>
 
         <div class="form-group-wrapper text-start">
-          <label for="courses" class="form-label">Paste your transcript</label>
+          <label for="courses" class="form-label">Paste your transcript (Past/Current Courses)</label>
           <textarea
             class="form-control transcript-input"
             id="courses"
             name="courses"
-            rows="12"
+            rows="8"
             placeholder="Paste your Quest unofficial transcript here — or just list courses: CS135, MATH137, STAT230"
             aria-describedby="courses-help"
             required
@@ -59,6 +59,30 @@
             don't matter. Include grades and units to get averages and credit totals; leave them out
             and you'll still get your requirements.
           </div>
+        </div>
+
+        <div class="form-group-wrapper text-start mt-4">
+          <label for="planned_courses" class="form-label">Future / Planned Courses</label>
+          <textarea
+            class="form-control"
+            id="planned_courses"
+            name="planned_courses"
+            rows="3"
+            placeholder="E.g., CS240, CS241, MATH239"
+          ><%= values.planned_courses %></textarea>
+          <div class="form-text">List the courses you plan to take to see if they meet your remaining requirements.</div>
+        </div>
+
+        <div class="form-group-wrapper text-start mt-4">
+          <label for="coops" class="form-label">Future Co-ops / Work Terms</label>
+          <textarea
+            class="form-control"
+            id="coops"
+            name="coops"
+            rows="3"
+            placeholder="E.g., Fall 2026: Software Engineer, Spring 2027: Data Analyst"
+          ><%= values.coops %></textarea>
+          <div class="form-text">Keep track of your upcoming co-op terms.</div>
         </div>
 
         <div class="text-center">
